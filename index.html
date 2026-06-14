@@ -9,13 +9,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --yolk:       #F5A623;
-      --comb:       #E8433A;
-      --feather:    #6DBE6C;
-      --sky:        #FFF8ED;
-      --earth:      #5C3D1E;
-      --cream:      #FFFDF5;
-      --shadow:     rgba(92,61,30,0.13);
+      --yolk:   #F5A623;
+      --comb:   #E8433A;
+      --feather:#6DBE6C;
+      --sky:    #FFF8ED;
+      --earth:  #5C3D1E;
+      --cream:  #FFFDF5;
+      --shadow: rgba(92,61,30,0.13);
     }
 
     body {
@@ -26,25 +26,19 @@
       overflow-x: hidden;
     }
 
-    /* ── floating feathers bg ── */
-    .bg-feathers {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-    }
+    .bg-feathers { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .bg-feathers span {
       position: absolute;
-      font-size: clamp(1.2rem, 3vw, 2.2rem);
       opacity: 0.13;
       animation: drift linear infinite;
     }
-
     @keyframes drift {
-      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0;    }
       10%  { opacity: 0.13; }
       90%  { opacity: 0.13; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;    }
     }
 
-    /* ── layout ── */
     .wrapper {
       position: relative; z-index: 1;
       max-width: 680px;
@@ -52,71 +46,30 @@
       padding: 2rem 1.25rem 4rem;
     }
 
-    /* ── header ── */
-    header {
-      text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-    }
+    header { text-align: center; padding: 2.5rem 1rem 1.5rem; }
     .header-badge {
       display: inline-block;
-      background: var(--comb);
-      color: #fff;
+      background: var(--comb); color: #fff;
       font-family: 'Fredoka One', cursive;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      padding: 0.3rem 1rem;
-      border-radius: 99px;
-      margin-bottom: 0.9rem;
-      text-transform: uppercase;
+      font-size: 0.85rem; letter-spacing: 0.08em;
+      padding: 0.3rem 1rem; border-radius: 99px;
+      margin-bottom: 0.9rem; text-transform: uppercase;
     }
     header h1 {
       font-family: 'Fredoka One', cursive;
       font-size: clamp(2.2rem, 7vw, 3.6rem);
-      color: var(--earth);
-      line-height: 1.1;
-      margin-bottom: 0.6rem;
+      color: var(--earth); line-height: 1.1; margin-bottom: 0.6rem;
     }
     header h1 span { color: var(--comb); }
-    header p {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #8a6040;
-      max-width: 440px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-    .chicken-emoji-row {
-      font-size: 2rem;
-      margin: 1rem 0 0.2rem;
-      letter-spacing: 0.15em;
-    }
+    header p { font-size: 1.05rem; font-weight: 600; color: #8a6040; max-width: 440px; margin: 0 auto; line-height: 1.5; }
+    .chicken-emoji-row { font-size: 2rem; margin: 1rem 0 0.2rem; letter-spacing: 0.15em; }
 
-    /* ── progress bar ── */
-    .progress-wrap {
-      background: #e8d8c0;
-      border-radius: 99px;
-      height: 10px;
-      margin: 1.8rem 0 0.4rem;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--yolk), var(--comb));
-      border-radius: 99px;
-      transition: width 0.45s cubic-bezier(.4,0,.2,1);
-    }
-    .progress-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #a07850;
-      text-align: right;
-      margin-bottom: 1.6rem;
-    }
+    .progress-wrap { background: #e8d8c0; border-radius: 99px; height: 10px; margin: 1.8rem 0 0.4rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--yolk), var(--comb)); border-radius: 99px; transition: width 0.45s cubic-bezier(.4,0,.2,1); }
+    .progress-label { font-size: 0.82rem; font-weight: 700; color: #a07850; text-align: right; margin-bottom: 1.6rem; }
 
-    /* ── question card ── */
     .card {
-      background: var(--cream);
-      border-radius: 24px;
+      background: var(--cream); border-radius: 24px;
       padding: 2rem 2rem 1.6rem;
       box-shadow: 0 6px 32px var(--shadow);
       border: 2px solid #f0e0c8;
@@ -127,210 +80,84 @@
       to   { opacity: 1; transform: translateY(0)    scale(1);    }
     }
 
-    .question-num {
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--yolk);
-      margin-bottom: 0.5rem;
-    }
-    .question-text {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(1.25rem, 4vw, 1.65rem);
-      line-height: 1.3;
-      color: var(--earth);
-      margin-bottom: 1.4rem;
-    }
+    .question-num { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yolk); margin-bottom: 0.5rem; }
+    .question-text { font-family: 'Fredoka One', cursive; font-size: clamp(1.25rem, 4vw, 1.65rem); line-height: 1.3; color: var(--earth); margin-bottom: 1.4rem; }
 
-    /* ── answer buttons ── */
     .answers { display: flex; flex-direction: column; gap: 0.75rem; }
     .answer-btn {
-      background: #fff;
-      border: 2.5px solid #e8d8c0;
-      border-radius: 14px;
+      background: #fff; border: 2.5px solid #e8d8c0; border-radius: 14px;
       padding: 0.85rem 1.1rem;
-      font-family: 'Nunito', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--earth);
-      cursor: pointer;
-      text-align: left;
+      font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
+      color: var(--earth); cursor: pointer; text-align: left;
       transition: border-color 0.18s, background 0.18s, transform 0.15s;
       line-height: 1.4;
     }
-    .answer-btn:hover {
-      border-color: var(--yolk);
-      background: #fff8ee;
-      transform: translateX(4px);
-    }
-    .answer-btn.selected {
-      border-color: var(--comb);
-      background: #fff0ee;
-      color: var(--comb);
-    }
+    .answer-btn:hover { border-color: var(--yolk); background: #fff8ee; transform: translateX(4px); }
+    .answer-btn.selected { border-color: var(--comb); background: #fff0ee; color: var(--comb); }
     .answer-btn .answer-emoji { margin-right: 0.5rem; font-size: 1.15em; }
 
-    /* ── next button ── */
     .btn-next {
-      display: block;
-      width: 100%;
-      margin-top: 1.4rem;
-      padding: 0.9rem;
+      display: block; width: 100%; margin-top: 1.4rem; padding: 0.9rem;
       background: linear-gradient(135deg, var(--yolk) 0%, var(--comb) 100%);
-      color: #fff;
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.25rem;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
+      color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.25rem;
+      border: none; border-radius: 14px; cursor: pointer;
       transition: opacity 0.2s, transform 0.15s;
       box-shadow: 0 4px 18px rgba(232,67,58,0.25);
     }
     .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
     .btn-next:not(:disabled):hover { transform: translateY(-2px); opacity: 0.93; }
 
-    /* ── loading state ── */
-    .loading-wrap {
-      text-align: center;
-      padding: 3rem 1rem;
-      animation: popIn 0.35s ease;
-    }
-    .egg-spin {
-      font-size: 3.5rem;
-      display: inline-block;
-      animation: wobble 0.7s ease-in-out infinite alternate;
-      margin-bottom: 1rem;
-    }
+    .loading-wrap { text-align: center; padding: 3rem 1rem; animation: popIn 0.35s ease; }
+    .egg-spin { font-size: 3.5rem; display: inline-block; animation: wobble 0.7s ease-in-out infinite alternate; margin-bottom: 1rem; }
     @keyframes wobble {
       from { transform: rotate(-15deg) scale(1);    }
       to   { transform: rotate(15deg)  scale(1.07); }
     }
-    .loading-wrap p {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem;
-      color: var(--earth);
-    }
-    .loading-wrap small {
-      display: block;
-      margin-top: 0.4rem;
-      font-size: 0.9rem;
-      color: #a07850;
-    }
+    .loading-wrap p { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--earth); }
+    .loading-wrap small { display: block; margin-top: 0.4rem; font-size: 0.9rem; color: #a07850; }
 
-    /* ── result card ── */
-    .result-wrap {
-      animation: popIn 0.45s cubic-bezier(.4,0,.2,1);
-    }
-    .result-breed-badge {
-      text-align: center;
-      font-size: 5rem;
-      margin-bottom: 0.5rem;
-      line-height: 1;
-    }
-    .result-card {
-      background: var(--cream);
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 6px 32px var(--shadow);
-      border: 2px solid #f0e0c8;
-    }
-    .result-card h2 {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      color: var(--comb);
-      text-align: center;
-      margin-bottom: 0.3rem;
-    }
-    .result-card .breed-name {
-      text-align: center;
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-      color: var(--yolk);
-      margin-bottom: 1.4rem;
-    }
-    .result-text {
-      font-size: 1.02rem;
-      line-height: 1.7;
-      color: #5a3d20;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .result-traits {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      margin-top: 1.4rem;
-    }
-    .trait-pill {
-      background: #fff0d6;
-      border: 1.5px solid var(--yolk);
-      border-radius: 99px;
-      padding: 0.3rem 0.85rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #8a5020;
-    }
+    .result-wrap { animation: popIn 0.45s cubic-bezier(.4,0,.2,1); }
+    .result-breed-badge { text-align: center; font-size: 5rem; margin-bottom: 0.5rem; line-height: 1; }
+    .result-card { background: var(--cream); border-radius: 24px; padding: 2rem; box-shadow: 0 6px 32px var(--shadow); border: 2px solid #f0e0c8; }
+    .result-card h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--comb); text-align: center; margin-bottom: 0.3rem; }
+    .result-card .breed-name { text-align: center; font-family: 'Fredoka One', cursive; font-size: clamp(1.1rem, 3.5vw, 1.5rem); color: var(--yolk); margin-bottom: 1.4rem; }
+    .result-text { font-size: 1.02rem; line-height: 1.7; color: #5a3d20; white-space: pre-wrap; word-break: break-word; }
+    .result-traits { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+    .trait-pill { background: #fff0d6; border: 1.5px solid var(--yolk); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.85rem; font-weight: 700; color: #8a5020; }
 
     .btn-retry {
-      display: block;
-      width: 100%;
-      margin-top: 1.6rem;
-      padding: 0.85rem;
-      background: var(--feather);
-      color: #fff;
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
+      display: block; width: 100%; margin-top: 1.6rem; padding: 0.85rem;
+      background: var(--feather); color: #fff;
+      font-family: 'Fredoka One', cursive; font-size: 1.2rem;
+      border: none; border-radius: 14px; cursor: pointer;
       transition: opacity 0.2s, transform 0.15s;
       box-shadow: 0 4px 18px rgba(109,190,108,0.3);
     }
     .btn-retry:hover { transform: translateY(-2px); opacity: 0.9; }
 
-    .share-row {
-      display: flex; gap: 0.75rem; margin-top: 0.85rem;
-    }
+    .share-row { display: flex; gap: 0.75rem; margin-top: 0.85rem; }
     .btn-share {
-      flex: 1;
-      padding: 0.7rem;
-      background: #fff;
-      border: 2px solid #e8d8c0;
-      border-radius: 12px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--earth);
-      cursor: pointer;
+      flex: 1; padding: 0.7rem; background: #fff;
+      border: 2px solid #e8d8c0; border-radius: 12px;
+      font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 800;
+      color: var(--earth); cursor: pointer;
       transition: border-color 0.18s, background 0.18s;
     }
     .btn-share:hover { border-color: var(--yolk); background: #fff8ee; }
 
     .error-msg {
-      background: #fff0ee;
-      border: 2px solid var(--comb);
-      border-radius: 14px;
-      padding: 1.1rem 1.2rem;
-      color: var(--comb);
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-top: 1rem;
-      text-align: center;
+      background: #fff0ee; border: 2px solid var(--comb); border-radius: 14px;
+      padding: 1.1rem 1.2rem; color: var(--comb); font-weight: 700;
+      font-size: 0.95rem; margin-top: 1rem; text-align: center;
     }
 
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      font-size: 0.82rem;
-      color: #b09070;
-      font-weight: 600;
-    }
+    footer { text-align: center; margin-top: 3rem; font-size: 0.82rem; color: #b09070; font-weight: 600; }
     footer a { color: var(--comb); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-<!-- floating feather background -->
 <div class="bg-feathers" id="bgFeathers"></div>
 
 <div class="wrapper">
@@ -350,8 +177,8 @@
 
 <script>
   // ── CONFIG ──────────────────────────────────────────────
-  const GROQ_API_KEY = "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";
-  const GROQ_MODEL   = "llama3-8b-8192";
+  // 👇 Replace this with your actual Cloudflare Worker URL after you deploy it
+  const WORKER_URL = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
 
   // ── QUESTIONS ───────────────────────────────────────────
   const questions = [
@@ -412,9 +239,7 @@
   ];
 
   // ── STATE ────────────────────────────────────────────────
-  let current = 0;
-  let selected = null;
-  let answers  = [];
+  let current = 0, selected = null, answers = [];
 
   // ── FLOATING FEATHERS ────────────────────────────────────
   const featherEmojis = ["🪶","🐔","🥚","🐣","🌾","🌻","✨"];
@@ -422,7 +247,7 @@
   for (let i = 0; i < 18; i++) {
     const s = document.createElement("span");
     s.textContent = featherEmojis[Math.floor(Math.random() * featherEmojis.length)];
-    s.style.left     = Math.random() * 100 + "vw";
+    s.style.left = Math.random() * 100 + "vw";
     s.style.animationDuration = (12 + Math.random() * 20) + "s";
     s.style.animationDelay   = -(Math.random() * 20) + "s";
     s.style.fontSize = (1.2 + Math.random() * 1.8) + "rem";
@@ -434,7 +259,6 @@
     const app = document.getElementById("app");
     const q   = questions[current];
     const pct = Math.round((current / questions.length) * 100);
-
     app.innerHTML = `
       <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
       <div class="progress-label">Question ${current + 1} of ${questions.length}</div>
@@ -443,8 +267,7 @@
         <div class="question-text">${q.text}</div>
         <div class="answers">
           ${q.answers.map((a, i) => `
-            <button class="answer-btn${selected === i ? ' selected' : ''}"
-                    onclick="pick(${i})">
+            <button class="answer-btn${selected === i ? ' selected' : ''}" onclick="pick(${i})">
               <span class="answer-emoji">${a.emoji}</span>${a.text}
             </button>`).join("")}
         </div>
@@ -453,40 +276,21 @@
                 onclick="next()">
           ${current < questions.length - 1 ? "Next Question 🐔" : "Find My Chicken! 🥚"}
         </button>
-      </div>
-    `;
+      </div>`;
   }
 
-  function pick(i) {
-    selected = i;
-    render();
-  }
+  function pick(i) { selected = i; render(); }
 
   function next() {
-    answers.push({
-      question: questions[current].text,
-      answer:   questions[current].answers[selected].text,
-    });
-    if (current < questions.length - 1) {
-      current++;
-      selected = null;
-      render();
-    } else {
-      showLoading();
-      getResult();
-    }
+    answers.push({ question: questions[current].text, answer: questions[current].answers[selected].text });
+    if (current < questions.length - 1) { current++; selected = null; render(); }
+    else { showLoading(); getResult(); }
   }
 
   // ── LOADING ──────────────────────────────────────────────
   function showLoading() {
-    const msgs = [
-      "Consulting the flock…",
-      "Reading the feathers…",
-      "Cracking open your destiny…",
-      "Asking the head hen…",
-    ];
-    const app = document.getElementById("app");
-    app.innerHTML = `
+    const msgs = ["Consulting the flock…","Reading the feathers…","Cracking open your destiny…","Asking the head hen…"];
+    document.getElementById("app").innerHTML = `
       <div class="loading-wrap">
         <div class="egg-spin">🥚</div>
         <p>${msgs[Math.floor(Math.random() * msgs.length)]}</p>
@@ -494,11 +298,9 @@
       </div>`;
   }
 
-  // ── GROQ CALL ────────────────────────────────────────────
+  // ── CALL WORKER (not Groq directly) ──────────────────────
   async function getResult() {
-    const summaryLines = answers.map((a, i) =>
-      `Q${i+1}: "${a.question}" → "${a.answer}"`
-    ).join("\n");
+    const summaryLines = answers.map((a, i) => `Q${i+1}: "${a.question}" → "${a.answer}"`).join("\n");
 
     const prompt = `You are The Chicken Lady — a wildly enthusiastic, warm, and funny chicken expert.
 Based on these quiz answers, reveal which chicken breed this person is and give them a delightful personalized reading.
@@ -516,28 +318,17 @@ Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):
 }`;
 
     try {
-      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      const res = await fetch(WORKER_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${GROQ_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: GROQ_MODEL,
-          temperature: 0.85,
-          max_tokens: 500,
-          messages: [{ role: "user", content: prompt }],
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
       });
 
-      if (!res.ok) throw new Error(`API error ${res.status}`);
+      if (!res.ok) throw new Error(`Worker error ${res.status}`);
       const data = await res.json();
       const raw  = data.choices[0].message.content.trim();
-
-      // strip accidental markdown fences
       const cleaned = raw.replace(/^```json\s*/i,"").replace(/^```\s*/i,"").replace(/```\s*$/,"").trim();
-      const result  = JSON.parse(cleaned);
-      showResult(result);
+      showResult(JSON.parse(cleaned));
     } catch (err) {
       showError(err);
     }
@@ -545,12 +336,8 @@ Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):
 
   // ── RESULT ───────────────────────────────────────────────
   function showResult(r) {
-    const app = document.getElementById("app");
-    const traits = (r.traits || []).map(t =>
-      `<span class="trait-pill">${t}</span>`
-    ).join("");
-
-    app.innerHTML = `
+    const traits = (r.traits || []).map(t => `<span class="trait-pill">${t}</span>`).join("");
+    document.getElementById("app").innerHTML = `
       <div class="result-wrap">
         <div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div>
         <div class="progress-label" style="color:var(--feather)">✅ Complete!</div>
@@ -561,8 +348,8 @@ Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):
           <p class="result-text">${r.reading}</p>
           <div class="result-traits">${traits}</div>
           <div class="share-row">
-            <button class="btn-share" onclick="copyResult('${encodeText(r)}')">📋 Copy Result</button>
-            <button class="btn-share" onclick="shareResult('${encodeText(r)}')">🔗 Share</button>
+            <button class="btn-share" onclick="copyResult(\`${escapeTemplate(r)}\`)">📋 Copy Result</button>
+            <button class="btn-share" onclick="shareResult(\`${escapeTemplate(r)}\`)">🔗 Share</button>
           </div>
           <button class="btn-retry" onclick="restart()">🔄 Take the Quiz Again</button>
         </div>
@@ -571,39 +358,28 @@ Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):
 
   function showError(err) {
     const app = document.getElementById("app");
-    const existing = app.querySelector(".card");
-    const msg = document.createElement("div");
-    msg.className = "error-msg";
-    msg.textContent = "The hens got confused! Please check your API key and try again. (" + err.message + ")";
-    if (existing) existing.appendChild(msg);
-    else app.innerHTML = `<div class="error-msg">${msg.textContent}</div>`;
+    app.innerHTML = `<div class="error-msg">The hens got confused! Please try again in a moment. (${err.message})</div>
+    <button class="btn-retry" style="margin-top:1rem" onclick="restart()">🔄 Start Over</button>`;
   }
 
   // ── HELPERS ──────────────────────────────────────────────
-  function restart() {
-    current  = 0;
-    selected = null;
-    answers  = [];
-    render();
+  function restart() { current = 0; selected = null; answers = []; render(); }
+
+  function escapeTemplate(r) {
+    return `I'm a ${r.breed}! ${r.headline} 🐔 Take the quiz at chickens.rlbdesigns.com`.replace(/`/g,"'");
   }
 
-  function encodeText(r) {
-    return encodeURIComponent(`I'm a ${r.breed}! ${r.headline} 🐔 Take the quiz at chickens.rlbdesigns.com`);
+  function copyResult(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => alert("Copied! Go share your inner chicken! 🐔"))
+      .catch(() => alert("Couldn't copy — try selecting the text manually."));
   }
 
-  function copyResult(encoded) {
-    navigator.clipboard.writeText(decodeURIComponent(encoded))
-      .then(() => alert("Copied to clipboard! Go share your inner chicken! 🐔"))
-      .catch(() => alert("Couldn't copy — try manually selecting the text."));
-  }
-
-  function shareResult(encoded) {
-    const text = decodeURIComponent(encoded);
+  function shareResult(text) {
     if (navigator.share) {
       navigator.share({ text, url: "https://chickens.rlbdesigns.com" });
     } else {
-      const tweetUrl = `https://twitter.com/intent/tweet?text=${encoded}`;
-      window.open(tweetUrl, "_blank");
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
     }
   }
 
