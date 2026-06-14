@@ -7,384 +7,298 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --yolk:   #F5A623;
       --comb:   #E8433A;
       --feather:#6DBE6C;
       --sky:    #FFF8ED;
-      --eaYOUR-WORKER-NAMErth:  #5C3D1E;
+      --earth:  #5C3D1E;
       --cream:  #FFFDF5;
       --shadow: rgba(92,61,30,0.13);
     }
-
-    body {
-      background: var(--sky);
-      font-family: 'Nunito', sans-serif;
-      color: var(--earth);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
+    body { background: var(--sky); font-family: 'Nunito', sans-serif; color: var(--earth); min-height: 100vh; overflow-x: hidden; }
     .bg-feathers { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .bg-feathers span {
-      position: absolute;
-      opacity: 0.13;
-      animation: drift linear infinite;
-    }
+    .bg-feathers span { position: absolute; opacity: 0.13; animation: drift linear infinite; }
     @keyframes drift {
       0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0;    }
       10%  { opacity: 0.13; }
       90%  { opacity: 0.13; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;    }
     }
-
-    .wrapper {
-      position: relative; z-index: 1;
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 4rem;
-    }
-
+    .wrapper { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
     header { text-align: center; padding: 2.5rem 1rem 1.5rem; }
-    .header-badge {
-      display: inline-block;
-      background: var(--comb); color: #fff;
-      font-family: 'Fredoka One', cursive;
-      font-size: 0.85rem; letter-spacing: 0.08em;
-      padding: 0.3rem 1rem; border-radius: 99px;
-      margin-bottom: 0.9rem; text-transform: uppercase;
-    }
-    header h1 {
-      font-family: 'Fredoka One', cursive;
-      font-size: clamp(2.2rem, 7vw, 3.6rem);
-      color: var(--earth); line-height: 1.1; margin-bottom: 0.6rem;
-    }
+    .header-badge { display: inline-block; background: var(--comb); color: #fff; font-family: 'Fredoka One', cursive; font-size: 0.85rem; letter-spacing: 0.08em; padding: 0.3rem 1rem; border-radius: 99px; margin-bottom: 0.9rem; text-transform: uppercase; }
+    header h1 { font-family: 'Fredoka One', cursive; font-size: clamp(2.2rem, 7vw, 3.6rem); color: var(--earth); line-height: 1.1; margin-bottom: 0.6rem; }
     header h1 span { color: var(--comb); }
     header p { font-size: 1.05rem; font-weight: 600; color: #8a6040; max-width: 440px; margin: 0 auto; line-height: 1.5; }
     .chicken-emoji-row { font-size: 2rem; margin: 1rem 0 0.2rem; letter-spacing: 0.15em; }
-
     .progress-wrap { background: #e8d8c0; border-radius: 99px; height: 10px; margin: 1.8rem 0 0.4rem; overflow: hidden; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--yolk), var(--comb)); border-radius: 99px; transition: width 0.45s cubic-bezier(.4,0,.2,1); }
     .progress-label { font-size: 0.82rem; font-weight: 700; color: #a07850; text-align: right; margin-bottom: 1.6rem; }
-
-    .card {
-      background: var(--cream); border-radius: 24px;
-      padding: 2rem 2rem 1.6rem;
-      box-shadow: 0 6px 32px var(--shadow);
-      border: 2px solid #f0e0c8;
-      animation: popIn 0.35s cubic-bezier(.4,0,.2,1);
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(18px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0)    scale(1);    }
-    }
-
+    .card { background: var(--cream); border-radius: 24px; padding: 2rem 2rem 1.6rem; box-shadow: 0 6px 32px var(--shadow); border: 2px solid #f0e0c8; animation: popIn 0.35s cubic-bezier(.4,0,.2,1); }
+    @keyframes popIn { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .question-num { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yolk); margin-bottom: 0.5rem; }
     .question-text { font-family: 'Fredoka One', cursive; font-size: clamp(1.25rem, 4vw, 1.65rem); line-height: 1.3; color: var(--earth); margin-bottom: 1.4rem; }
-
     .answers { display: flex; flex-direction: column; gap: 0.75rem; }
-    .answer-btn {
-      background: #fff; border: 2.5px solid #e8d8c0; border-radius: 14px;
-      padding: 0.85rem 1.1rem;
-      font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
-      color: var(--earth); cursor: pointer; text-align: left;
-      transition: border-color 0.18s, background 0.18s, transform 0.15s;
-      line-height: 1.4;
-    }
+    .answer-btn { background: #fff; border: 2.5px solid #e8d8c0; border-radius: 14px; padding: 0.85rem 1.1rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; color: var(--earth); cursor: pointer; text-align: left; transition: border-color 0.18s, background 0.18s, transform 0.15s; line-height: 1.4; }
     .answer-btn:hover { border-color: var(--yolk); background: #fff8ee; transform: translateX(4px); }
     .answer-btn.selected { border-color: var(--comb); background: #fff0ee; color: var(--comb); }
-    .answer-btn .answer-emoji { margin-right: 0.5rem; font-size: 1.15em; }
-
-    .btn-next {
-      display: block; width: 100%; margin-top: 1.4rem; padding: 0.9rem;
-      background: linear-gradient(135deg, var(--yolk) 0%, var(--comb) 100%);
-      color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.25rem;
-      border: none; border-radius: 14px; cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 18px rgba(232,67,58,0.25);
-    }
+    .answer-emoji { margin-right: 0.5rem; font-size: 1.15em; }
+    .btn-next { display: block; width: 100%; margin-top: 1.4rem; padding: 0.9rem; background: linear-gradient(135deg, var(--yolk) 0%, var(--comb) 100%); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.25rem; border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 18px rgba(232,67,58,0.25); }
     .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
     .btn-next:not(:disabled):hover { transform: translateY(-2px); opacity: 0.93; }
-
     .loading-wrap { text-align: center; padding: 3rem 1rem; animation: popIn 0.35s ease; }
     .egg-spin { font-size: 3.5rem; display: inline-block; animation: wobble 0.7s ease-in-out infinite alternate; margin-bottom: 1rem; }
-    @keyframes wobble {
-      from { transform: rotate(-15deg) scale(1);    }
-      to   { transform: rotate(15deg)  scale(1.07); }
-    }
+    @keyframes wobble { from { transform: rotate(-15deg) scale(1); } to { transform: rotate(15deg) scale(1.07); } }
     .loading-wrap p { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--earth); }
     .loading-wrap small { display: block; margin-top: 0.4rem; font-size: 0.9rem; color: #a07850; }
-
     .result-wrap { animation: popIn 0.45s cubic-bezier(.4,0,.2,1); }
     .result-breed-badge { text-align: center; font-size: 5rem; margin-bottom: 0.5rem; line-height: 1; }
     .result-card { background: var(--cream); border-radius: 24px; padding: 2rem; box-shadow: 0 6px 32px var(--shadow); border: 2px solid #f0e0c8; }
     .result-card h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--comb); text-align: center; margin-bottom: 0.3rem; }
-    .result-card .breed-name { text-align: center; font-family: 'Fredoka One', cursive; font-size: clamp(1.1rem, 3.5vw, 1.5rem); color: var(--yolk); margin-bottom: 1.4rem; }
-    .result-text { font-size: 1.02rem; line-height: 1.7; color: #5a3d20; white-space: pre-wrap; word-break: break-word; }
+    .breed-name { text-align: center; font-family: 'Fredoka One', cursive; font-size: clamp(1.1rem, 3.5vw, 1.5rem); color: var(--yolk); margin-bottom: 1.4rem; }
+    .result-text { font-size: 1.02rem; line-height: 1.7; color: #5a3d20; }
     .result-traits { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
     .trait-pill { background: #fff0d6; border: 1.5px solid var(--yolk); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.85rem; font-weight: 700; color: #8a5020; }
-
-    .btn-retry {
-      display: block; width: 100%; margin-top: 1.6rem; padding: 0.85rem;
-      background: var(--feather); color: #fff;
-      font-family: 'Fredoka One', cursive; font-size: 1.2rem;
-      border: none; border-radius: 14px; cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 18px rgba(109,190,108,0.3);
-    }
+    .btn-retry { display: block; width: 100%; margin-top: 1.6rem; padding: 0.85rem; background: var(--feather); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.2rem; border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 18px rgba(109,190,108,0.3); }
     .btn-retry:hover { transform: translateY(-2px); opacity: 0.9; }
-
     .share-row { display: flex; gap: 0.75rem; margin-top: 0.85rem; }
-    .btn-share {
-      flex: 1; padding: 0.7rem; background: #fff;
-      border: 2px solid #e8d8c0; border-radius: 12px;
-      font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 800;
-      color: var(--earth); cursor: pointer;
-      transition: border-color 0.18s, background 0.18s;
-    }
+    .btn-share { flex: 1; padding: 0.7rem; background: #fff; border: 2px solid #e8d8c0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--earth); cursor: pointer; transition: border-color 0.18s, background 0.18s; }
     .btn-share:hover { border-color: var(--yolk); background: #fff8ee; }
-
-    .error-msg {
-      background: #fff0ee; border: 2px solid var(--comb); border-radius: 14px;
-      padding: 1.1rem 1.2rem; color: var(--comb); font-weight: 700;
-      font-size: 0.95rem; margin-top: 1rem; text-align: center;
-    }
-
+    .error-msg { background: #fff0ee; border: 2px solid var(--comb); border-radius: 14px; padding: 1.1rem 1.2rem; color: var(--comb); font-weight: 700; font-size: 0.95rem; margin-top: 1rem; text-align: center; }
     footer { text-align: center; margin-top: 3rem; font-size: 0.82rem; color: #b09070; font-weight: 600; }
     footer a { color: var(--comb); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-
 <div class="bg-feathers" id="bgFeathers"></div>
-
 <div class="wrapper">
   <header>
-    <div class="header-badge">🐔 The Chicken Lady Presents</div>
+    <div class="header-badge">&#x1F413; The Chicken Lady Presents</div>
     <h1>What Chicken<br><span>Are You?</span></h1>
     <p>Answer 6 clucky questions and our AI will reveal your inner chicken breed.</p>
-    <div class="chicken-emoji-row">🥚🐣🐥🐔</div>
+    <div class="chicken-emoji-row">&#x1F95A;&#x1F423;&#x1F425;&#x1F413;</div>
   </header>
-
   <div id="app"></div>
-
   <footer>
-    <p>Made with 🧡 by <a href="https://chickens.rlbdesigns.com" target="_blank">The Chicken Lady</a> &nbsp;•&nbsp; Powered by Groq AI</p>
+    <p>Made with &#x2764; by <a href="https://chickens.rlbdesigns.com" target="_blank">The Chicken Lady</a> &nbsp;&bull;&nbsp; Powered by Groq AI</p>
   </footer>
 </div>
 
 <script>
-  // ── CONFIG ──────────────────────────────────────────────
-  // 👇 Replace this with your actual Cloudflare Worker URL after you deploy it
-const WORKER_URL = "https://chicken-lady-proxy.iamthechickenlady.workers.dev";
+var WORKER_URL = "https://chicken-lady-proxy.iamthechickenlady.workers.dev";
 
-  // ── QUESTIONS ───────────────────────────────────────────
-  const questions = [
-    {
-      text: "It's a beautiful morning on the farm. What's the first thing you do?",
-      answers: [
-        { emoji: "🌅", text: "Crow loudly and wake up everyone — the day starts NOW!" },
-        { emoji: "🌿", text: "Quietly wander the yard, pecking at interesting things" },
-        { emoji: "🛌", text: "Stay in the coop a little longer. The sun can wait." },
-        { emoji: "👑", text: "Strut to the best spot and make sure everyone notices" },
-      ]
-    },
-    {
-      text: "Someone new joins the flock. How do you react?",
-      answers: [
-        { emoji: "🤝", text: "Walk right up and introduce yourself immediately" },
-        { emoji: "👀", text: "Watch from a safe distance for a while first" },
-        { emoji: "😤", text: "This is MY yard. They need to earn their place." },
-        { emoji: "🎉", text: "The more the merrier — new friend to explore with!" },
-      ]
-    },
-    {
-      text: "You discover the most amazing pile of scratch grain. What do you do?",
-      answers: [
-        { emoji: "🍽️", text: "Dive in immediately — finders keepers!" },
-        { emoji: "📢", text: "Call the whole flock over to share the discovery" },
-        { emoji: "🤫", text: "Secretly peck quietly so you can enjoy it alone" },
-        { emoji: "🔍", text: "Inspect it carefully first — you never know!" },
-      ]
-    },
-    {
-      text: "A thunderstorm rolls in. Where are you?",
-      answers: [
-        { emoji: "🏃", text: "Already back in the coop before the first drop falls" },
-        { emoji: "🌧️", text: "Still outside — a little rain never bothered me" },
-        { emoji: "😱", text: "Running in circles making a huge fuss about it" },
-        { emoji: "😴", text: "Fast asleep in a cozy corner of the coop" },
-      ]
-    },
-    {
-      text: "What's your personal style?",
-      answers: [
-        { emoji: "✨", text: "Fluffy, fabulous, and impossible to ignore" },
-        { emoji: "🎯", text: "Sleek and practical — looks aren't everything" },
-        { emoji: "🎨", text: "Bold colors and unique patterns — I'm a statement" },
-        { emoji: "🤎", text: "Classic and understated — elegance over flash" },
-      ]
-    },
-    {
-      text: "How do you handle a problem?",
-      answers: [
-        { emoji: "💪", text: "Head on — cluck loudly until something changes" },
-        { emoji: "🧠", text: "Think it through carefully before making a move" },
-        { emoji: "🤝", text: "Gather the flock and figure it out together" },
-        { emoji: "🚶", text: "Walk away and find a better spot entirely" },
-      ]
-    },
-  ];
+var questions = [
+  { text: "It's a beautiful morning on the farm. What's the first thing you do?", answers: [
+    { emoji: "&#x1F305;", text: "Crow loudly and wake up everyone — the day starts NOW!" },
+    { emoji: "&#x1F33F;", text: "Quietly wander the yard, pecking at interesting things" },
+    { emoji: "&#x1F6CC;", text: "Stay in the coop a little longer. The sun can wait." },
+    { emoji: "&#x1F451;", text: "Strut to the best spot and make sure everyone notices" }
+  ]},
+  { text: "Someone new joins the flock. How do you react?", answers: [
+    { emoji: "&#x1F91D;", text: "Walk right up and introduce yourself immediately" },
+    { emoji: "&#x1F440;", text: "Watch from a safe distance for a while first" },
+    { emoji: "&#x1F624;", text: "This is MY yard. They need to earn their place." },
+    { emoji: "&#x1F389;", text: "The more the merrier — new friend to explore with!" }
+  ]},
+  { text: "You discover the most amazing pile of scratch grain. What do you do?", answers: [
+    { emoji: "&#x1F37D;", text: "Dive in immediately — finders keepers!" },
+    { emoji: "&#x1F4E2;", text: "Call the whole flock over to share the discovery" },
+    { emoji: "&#x1F92B;", text: "Secretly peck quietly so you can enjoy it alone" },
+    { emoji: "&#x1F50D;", text: "Inspect it carefully first — you never know!" }
+  ]},
+  { text: "A thunderstorm rolls in. Where are you?", answers: [
+    { emoji: "&#x1F3C3;", text: "Already back in the coop before the first drop falls" },
+    { emoji: "&#x1F327;", text: "Still outside — a little rain never bothered me" },
+    { emoji: "&#x1F631;", text: "Running in circles making a huge fuss about it" },
+    { emoji: "&#x1F634;", text: "Fast asleep in a cozy corner of the coop" }
+  ]},
+  { text: "What's your personal style?", answers: [
+    { emoji: "&#x2728;", text: "Fluffy, fabulous, and impossible to ignore" },
+    { emoji: "&#x1F3AF;", text: "Sleek and practical — looks aren't everything" },
+    { emoji: "&#x1F3A8;", text: "Bold colors and unique patterns — I'm a statement" },
+    { emoji: "&#x1F90E;", text: "Classic and understated — elegance over flash" }
+  ]},
+  { text: "How do you handle a problem?", answers: [
+    { emoji: "&#x1F4AA;", text: "Head on — cluck loudly until something changes" },
+    { emoji: "&#x1F9E0;", text: "Think it through carefully before making a move" },
+    { emoji: "&#x1F91D;", text: "Gather the flock and figure it out together" },
+    { emoji: "&#x1F6B6;", text: "Walk away and find a better spot entirely" }
+  ]}
+];
 
-  // ── STATE ────────────────────────────────────────────────
-  let current = 0, selected = null, answers = [];
+var current = 0;
+var selected = null;
+var answers = [];
 
-  // ── FLOATING FEATHERS ────────────────────────────────────
-  const featherEmojis = ["🪶","🐔","🥚","🐣","🌾","🌻","✨"];
-  const bg = document.getElementById("bgFeathers");
-  for (let i = 0; i < 18; i++) {
-    const s = document.createElement("span");
-    s.textContent = featherEmojis[Math.floor(Math.random() * featherEmojis.length)];
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.animationDuration = (12 + Math.random() * 20) + "s";
-    s.style.animationDelay   = -(Math.random() * 20) + "s";
-    s.style.fontSize = (1.2 + Math.random() * 1.8) + "rem";
-    bg.appendChild(s);
+// floating feathers
+var feathers = ["&#x1FAB6;","&#x1F413;","&#x1F95A;","&#x1F423;","&#x1F33E;","&#x1F33B;","&#x2728;"];
+var bg = document.getElementById("bgFeathers");
+for (var f = 0; f < 18; f++) {
+  var s = document.createElement("span");
+  s.innerHTML = feathers[Math.floor(Math.random() * feathers.length)];
+  s.style.left = (Math.random() * 100) + "vw";
+  s.style.animationDuration = (12 + Math.random() * 20) + "s";
+  s.style.animationDelay = "-" + (Math.random() * 20) + "s";
+  s.style.fontSize = (1.2 + Math.random() * 1.8) + "rem";
+  bg.appendChild(s);
+}
+
+function render() {
+  var app = document.getElementById("app");
+  var q = questions[current];
+  var pct = Math.round((current / questions.length) * 100);
+  var btns = "";
+  for (var i = 0; i < q.answers.i; i++) {
+    var a = q.answers[i];
+    var sel = (selected === i) ? " selected" : "";
+    btns += '<button class="answer-btn' + sel + '" onclick="pick(' + i + ')"><span class="answer-emoji">' + a.emoji + '</span>' + a.text + '</button>';
   }
+  var nextLabel = (current < questions.length - 1) ? "Next Question &#x1F413;" : "Find My Chicken! &#x1F95A;";
+  var nextDisabled = (selected === null) ? "disabled" : "";
+  app.innerHTML =
+    '<div class="progress-wrap"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+    '<div class="progress-label">Question ' + (current + 1) + ' of ' + questions.length + '</div>' +
+    '<div class="card">' +
+      '<div class="question-num">Question ' + (current + 1) + '</div>' +
+      '<div class="question-text">' + q.text + '</div>' +
+      '<div class="answers" id="answers"></div>' +
+      '<button class="btn-next" ' + nextDisabled + ' onclick="nextQ()">' + nextLabel + '</button>' +
+    '</div>';
 
-  // ── RENDER ───────────────────────────────────────────────
-  function render() {
-    const app = document.getElementById("app");
-    const q   = questions[current];
-    const pct = Math.round((current / questions.length) * 100);
-    app.innerHTML = `
-      <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="progress-label">Question ${current + 1} of ${questions.length}</div>
-      <div class="card">
-        <div class="question-num">Question ${current + 1}</div>
-        <div class="question-text">${q.text}</div>
-        <div class="answers">
-          ${q.answers.map((a, i) => `
-            <button class="answer-btn${selected === i ? ' selected' : ''}" onclick="pick(${i})">
-              <span class="answer-emoji">${a.emoji}</span>${a.text}
-            </button>`).join("")}
-        </div>
-        <button class="btn-next" id="btnNext"
-                ${selected === null ? "disabled" : ""}
-                onclick="next()">
-          ${current < questions.length - 1 ? "Next Question 🐔" : "Find My Chicken! 🥚"}
-        </button>
-      </div>`;
+  // build answer buttons safely
+  var answersDiv = document.getElementById("answers");
+  for (var j = 0; j < q.answers.length; j++) {
+    var btn = document.createElement("button");
+    btn.className = "answer-btn" + (selected === j ? " selected" : "");
+    btn.innerHTML = '<span class="answer-emoji">' + q.answers[j].emoji + '</span>' + q.answers[j].text;
+    btn.setAttribute("data-index", j);
+    btn.onclick = (function(idx) { return function() { pick(idx); }; })(j);
+    answersDiv.appendChild(btn);
   }
+}
 
-  function pick(i) { selected = i; render(); }
-
-  function next() {
-    answers.push({ question: questions[current].text, answer: questions[current].answers[selected].text });
-    if (current < questions.length - 1) { current++; selected = null; render(); }
-    else { showLoading(); getResult(); }
-  }
-
-  // ── LOADING ──────────────────────────────────────────────
-  function showLoading() {
-    const msgs = ["Consulting the flock…","Reading the feathers…","Cracking open your destiny…","Asking the head hen…"];
-    document.getElementById("app").innerHTML = `
-      <div class="loading-wrap">
-        <div class="egg-spin">🥚</div>
-        <p>${msgs[Math.floor(Math.random() * msgs.length)]}</p>
-        <small>The Chicken Lady is thinking…</small>
-      </div>`;
-  }
-
-  // ── CALL WORKER (not Groq directly) ──────────────────────
-  async function getResult() {
-    const summaryLines = answers.map((a, i) => `Q${i+1}: "${a.question}" → "${a.answer}"`).join("\n");
-
-    const prompt = `You are The Chicken Lady — a wildly enthusiastic, warm, and funny chicken expert.
-Based on these quiz answers, reveal which chicken breed this person is and give them a delightful personalized reading.
-
-ANSWERS:
-${summaryLines}
-
-Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):
-{
-  "breed": "Breed Name",
-  "emoji": "one fitting emoji",
-  "headline": "A fun 6-8 word headline about this breed match",
-  "reading": "3-4 sentences in The Chicken Lady's warm, funny, enthusiastic voice. Make it personal to their answers. Include a fun chicken fact about this breed.",
-  "traits": ["trait1", "trait2", "trait3", "trait4"]
-}`;
-
-    try {
-      const res = await fetch(WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-
-      if (!res.ok) throw new Error(`Worker error ${res.status}`);
-      const data = await res.json();
-      const raw  = data.choices[0].message.content.trim();
-      const cleaned = raw.replace(/^```json\s*/i,"").replace(/^```\s*/i,"").replace(/```\s*$/,"").trim();
-      showResult(JSON.parse(cleaned));
-    } catch (err) {
-      showError(err);
-    }
-  }
-
-  // ── RESULT ───────────────────────────────────────────────
-  function showResult(r) {
-    const traits = (r.traits || []).map(t => `<span class="trait-pill">${t}</span>`).join("");
-    document.getElementById("app").innerHTML = `
-      <div class="result-wrap">
-        <div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div>
-        <div class="progress-label" style="color:var(--feather)">✅ Complete!</div>
-        <div class="result-breed-badge">${r.emoji || "🐔"}</div>
-        <div class="result-card">
-          <h2>${r.headline || "You've found your chicken!"}</h2>
-          <div class="breed-name">You are: The ${r.breed}</div>
-          <p class="result-text">${r.reading}</p>
-          <div class="result-traits">${traits}</div>
-          <div class="share-row">
-            <button class="btn-share" onclick="copyResult(\`${escapeTemplate(r)}\`)">📋 Copy Result</button>
-            <button class="btn-share" onclick="shareResult(\`${escapeTemplate(r)}\`)">🔗 Share</button>
-          </div>
-          <button class="btn-retry" onclick="restart()">🔄 Take the Quiz Again</button>
-        </div>
-      </div>`;
-  }
-
-  function showError(err) {
-    const app = document.getElementById("app");
-    app.innerHTML = `<div class="error-msg">The hens got confused! Please try again in a moment. (${err.message})</div>
-    <button class="btn-retry" style="margin-top:1rem" onclick="restart()">🔄 Start Over</button>`;
-  }
-
-  // ── HELPERS ──────────────────────────────────────────────
-  function restart() { current = 0; selected = null; answers = []; render(); }
-
-  function escapeTemplate(r) {
-    return `I'm a ${r.breed}! ${r.headline} 🐔 Take the quiz at chickens.rlbdesigns.com`.replace(/`/g,"'");
-  }
-
-  function copyResult(text) {
-    navigator.clipboard.writeText(text)
-      .then(() => alert("Copied! Go share your inner chicken! 🐔"))
-      .catch(() => alert("Couldn't copy — try selecting the text manually."));
-  }
-
-  function shareResult(text) {
-    if (navigator.share) {
-      navigator.share({ text, url: "https://chickens.rlbdesigns.com" });
-    } else {
-      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
-    }
-  }
-
-  // ── BOOT ─────────────────────────────────────────────────
+function pick(i) {
+  selected = i;
   render();
+}
+
+function nextQ() {
+  if (selected === null) return;
+  answers.push({
+    question: questions[current].text,
+    answer: questions[current].answers[selected].text
+  });
+  if (current < questions.length - 1) {
+    current++;
+    selected = null;
+    render();
+  } else {
+    showLoading();
+    getResult();
+  }
+}
+
+function showLoading() {
+  var msgs = ["Consulting the flock...", "Reading the feathers...", "Cracking open your destiny...", "Asking the head hen..."];
+  var msg = msgs[Math.floor(Math.random() * msgs.length)];
+  document.getElementById("app").innerHTML =
+    '<div class="loading-wrap">' +
+      '<div class="egg-spin">&#x1F95A;</div>' +
+      '<p>' + msg + '</p>' +
+      '<small>The Chicken Lady is thinking...</small>' +
+    '</div>';
+}
+
+function getResult() {
+  var lines = "";
+  for (var i = 0; i < answers.length; i++) {
+    lines += "Q" + (i + 1) + ': "' + answers[i].question + '" -> "' + answers[i].answer + '"\n';
+  }
+
+  var prompt = "You are The Chicken Lady — a wildly enthusiastic, warm, and funny chicken expert.\n" +
+    "Based on these quiz answers, reveal which chicken breed this person is.\n\n" +
+    "ANSWERS:\n" + lines + "\n" +
+    "Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):\n" +
+    '{"breed":"Breed Name","emoji":"one emoji","headline":"A fun 6-8 word headline","reading":"3-4 sentences in warm funny voice with a chicken fact","traits":["trait1","trait2","trait3","trait4"]}';
+
+  fetch(WORKER_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt: prompt })
+  })
+  .then(function(res) {
+    if (!res.ok) {
+      return res.text().then(function(t) { throw new Error("Worker error " + res.status + ": " + t); });
+    }
+    return res.json();
+  })
+  .then(function(data) {
+    var raw = data.choices[0].message.content.trim();
+    var cleaned = raw.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/, "").trim();
+    var result = JSON.parse(cleaned);
+    showResult(result);
+  })
+  .catch(function(err) {
+    showError(err.message);
+  });
+}
+
+function showResult(r) {
+  var traits = "";
+  if (r.traits) {
+    for (var i = 0; i < r.traits.length; i++) {
+      traits += '<span class="trait-pill">' + r.traits[i] + '</span>';
+    }
+  }
+  var shareText = "I am a " + r.breed + "! " + r.headline + " Take the quiz at chickens.rlbdesigns.com";
+  document.getElementById("app").innerHTML =
+    '<div class="result-wrap">' +
+      '<div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div>' +
+      '<div class="progress-label" style="color:var(--feather)">Complete!</div>' +
+      '<div class="result-breed-badge">' + (r.emoji || "&#x1F413;") + '</div>' +
+      '<div class="result-card">' +
+        '<h2>' + (r.headline || "You found your chicken!") + '</h2>' +
+        '<div class="breed-name">You are: The ' + r.breed + '</div>' +
+        '<p class="result-text">' + r.reading + '</p>' +
+        '<div class="result-traits">' + traits + '</div>' +
+        '<div class="share-row">' +
+          '<button class="btn-share" id="copyBtn">&#x1F4CB; Copy Result</button>' +
+          '<button class="btn-share" id="shareBtn">&#x1F517; Share</button>' +
+        '</div>' +
+        '<button class="btn-retry" onclick="restart()">&#x1F504; Take the Quiz Again</button>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById("copyBtn").onclick = function() {
+    navigator.clipboard.writeText(shareText)
+      .then(function() { alert("Copied! Share your inner chicken!"); })
+      .catch(function() { alert("Couldn't copy — try manually."); });
+  };
+  document.getElementById("shareBtn").onclick = function() {
+    if (navigator.share) {
+      navigator.share({ text: shareText, url: "https://chickens.rlbdesigns.com" });
+    } else {
+      window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText), "_blank");
+    }
+  };
+}
+
+function showError(msg) {
+  document.getElementById("app").innerHTML =
+    '<div class="error-msg">The hens got confused! ' + msg + '</div>' +
+    '<button class="btn-retry" style="margin-top:1rem" onclick="restart()">&#x1F504; Start Over</button>';
+}
+
+function restart() {
+  current = 0;
+  selected = null;
+  answers = [];
+  render();
+}
+
+render();
 </script>
 </body>
 </html>
