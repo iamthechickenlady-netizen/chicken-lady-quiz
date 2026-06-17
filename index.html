@@ -318,10 +318,42 @@ function getResult() {
     updateStep("step1", true);
     updateStep("step2", false);
     var raw = data.choices[0].message.content.trim();
-    var cleaned = raw.replace(/^```json\s*/i,"").replace(/^```\s*/i,"").replace(/```\s*$/,"").trim();
-    var result = JSON.parse(cleaned);
 
-    // Normalize breed name
+    // Strip markdown fences if present
+    var cleaned = raw.replace(/^```json\s*/i,"").replace(/^```\s*/i,"").replace(/```\s*$/,"").trim();
+
+    // Find the outermost { } to isolate the JSON object
+    var start = cleaned.indexOf("{");
+    var end = cleaned.lastIndexOf("}");
+    if (start !== -1 && end !== -1) {
+      cleaned = cleaned.substring(start, end + 1);
+    }
+
+    // Sanitize: remove control characters that break JSON parsing
+    cleaned = cleaned.replace(/[\u0000-\u001F\u007F]/g, function(c) {
+      if (c === "\n") return "\\n";
+      if (c === "\r") return "\\r";
+      if (c === "\t") return "\\t";
+      return "";
+    });
+
+    var result;
+    try {
+      result = JSON.parse(cleaned);
+    } catch(parseErr) {
+      // Last resort: extract fields manually with regex
+      var breedMatch = cleaned.match(/"breed"\s*:\s*"([^"]+)"/);
+      var headlineMatch = cleaned.match(/"headline"\s*:\s*"([^"]+)"/);
+      var readingMatch = cleaned.match(/"reading"\s*:\s*"([\s\S]+?)(?:"\s*,\s*"traits"|"\s*})/);
+      result = {
+        breed: breedMatch ? breedMatch[1] : "",
+        headline: headlineMatch ? headlineMatch[1] : "You found your chicken vibe!",
+        reading: readingMatch ? readingMatch[1].replace(/\\n/g," ") : "The Chicken Lady has spoken — you are a truly unique chicken!",
+        traits: ["Fabulous", "Unique", "Clucky", "One of a kind"]
+      };
+    }
+
+    // Normalize breed name to one of our exact keys
     var matchedBreed = null;
     var breedKeys = Object.keys(BREEDS);
     for (var b = 0; b < breedKeys.length; b++) {
@@ -335,8 +367,8 @@ function getResult() {
 
     updateStep("step2", true);
     updateStep("step3", false);
-    showResult(result, null); // show result immediately with placeholder
-    generateImage(matchedBreed); // then generate image async
+    showResult(result, null);
+    generateImage(matchedBreed);
   })
   .catch(function(err) { showError(err.message); });
 }
