@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What Chicken Are You? | The Chicken Lady</title>
+  <title>What Chicken Breed Matches Your Vibe? | The Chicken Lady</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,117 +14,200 @@
       --sky:    #FFF8ED;
       --earth:  #5C3D1E;
       --cream:  #FFFDF5;
-      --shadow: rgba(92,61,30,0.13);
+      --shadow: rgba(92,61,30,0.15);
     }
     body { background: var(--sky); font-family: 'Nunito', sans-serif; color: var(--earth); min-height: 100vh; overflow-x: hidden; }
     .bg-feathers { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .bg-feathers span { position: absolute; opacity: 0.13; animation: drift linear infinite; }
+    .bg-feathers span { position: absolute; opacity: 0.12; animation: drift linear infinite; }
     @keyframes drift {
-      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0;    }
-      10%  { opacity: 0.13; }
-      90%  { opacity: 0.13; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;    }
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.12; }
+      90%  { opacity: 0.12; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
-    .wrapper { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    header { text-align: center; padding: 2.5rem 1rem 1.5rem; }
-    .header-badge { display: inline-block; background: var(--comb); color: #fff; font-family: 'Fredoka One', cursive; font-size: 0.85rem; letter-spacing: 0.08em; padding: 0.3rem 1rem; border-radius: 99px; margin-bottom: 0.9rem; text-transform: uppercase; }
-    header h1 { font-family: 'Fredoka One', cursive; font-size: clamp(2.2rem, 7vw, 3.6rem); color: var(--earth); line-height: 1.1; margin-bottom: 0.6rem; }
+    .wrapper { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header { text-align: center; padding: 2rem 1rem 1.5rem; }
+    .header-badge { display: inline-block; background: var(--comb); color: #fff; font-family: 'Fredoka One', cursive; font-size: 0.85rem; letter-spacing: 0.08em; padding: 0.3rem 1.1rem; border-radius: 99px; margin-bottom: 0.9rem; text-transform: uppercase; }
+    header h1 { font-family: 'Fredoka One', cursive; font-size: clamp(1.9rem, 6vw, 3.2rem); color: var(--earth); line-height: 1.15; margin-bottom: 0.5rem; }
     header h1 span { color: var(--comb); }
-    header p { font-size: 1.05rem; font-weight: 600; color: #8a6040; max-width: 440px; margin: 0 auto; line-height: 1.5; }
-    .chicken-emoji-row { font-size: 2rem; margin: 1rem 0 0.2rem; letter-spacing: 0.15em; }
+    header p { font-size: 1rem; font-weight: 600; color: #8a6040; max-width: 480px; margin: 0 auto; line-height: 1.5; }
+    .emoji-row { font-size: 2rem; margin: 0.9rem 0 0.2rem; letter-spacing: 0.12em; }
     .progress-wrap { background: #e8d8c0; border-radius: 99px; height: 10px; margin: 1.8rem 0 0.4rem; overflow: hidden; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--yolk), var(--comb)); border-radius: 99px; transition: width 0.45s cubic-bezier(.4,0,.2,1); }
-    .progress-label { font-size: 0.82rem; font-weight: 700; color: #a07850; text-align: right; margin-bottom: 1.6rem; }
+    .progress-label { font-size: 0.82rem; font-weight: 700; color: #a07850; text-align: right; margin-bottom: 1.4rem; }
     .card { background: var(--cream); border-radius: 24px; padding: 2rem 2rem 1.6rem; box-shadow: 0 6px 32px var(--shadow); border: 2px solid #f0e0c8; animation: popIn 0.35s cubic-bezier(.4,0,.2,1); }
-    @keyframes popIn { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .question-num { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yolk); margin-bottom: 0.5rem; }
-    .question-text { font-family: 'Fredoka One', cursive; font-size: clamp(1.25rem, 4vw, 1.65rem); line-height: 1.3; color: var(--earth); margin-bottom: 1.4rem; }
-    .answers { display: flex; flex-direction: column; gap: 0.75rem; }
-    .answer-btn { background: #fff; border: 2.5px solid #e8d8c0; border-radius: 14px; padding: 0.85rem 1.1rem; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; color: var(--earth); cursor: pointer; text-align: left; transition: border-color 0.18s, background 0.18s, transform 0.15s; line-height: 1.4; }
+    @keyframes popIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+    .question-num { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yolk); margin-bottom: 0.4rem; }
+    .question-text { font-family: 'Fredoka One', cursive; font-size: clamp(1.2rem, 3.5vw, 1.55rem); line-height: 1.3; color: var(--earth); margin-bottom: 1.3rem; }
+    .answers { display: flex; flex-direction: column; gap: 0.7rem; }
+    .answer-btn { background: #fff; border: 2.5px solid #e8d8c0; border-radius: 14px; padding: 0.8rem 1rem; font-family: 'Nunito', sans-serif; font-size: 0.97rem; font-weight: 700; color: var(--earth); cursor: pointer; text-align: left; transition: border-color 0.18s, background 0.18s, transform 0.15s; line-height: 1.4; }
     .answer-btn:hover { border-color: var(--yolk); background: #fff8ee; transform: translateX(4px); }
     .answer-btn.selected { border-color: var(--comb); background: #fff0ee; color: var(--comb); }
-    .answer-emoji { margin-right: 0.5rem; font-size: 1.15em; }
-    .btn-next { display: block; width: 100%; margin-top: 1.4rem; padding: 0.9rem; background: linear-gradient(135deg, var(--yolk) 0%, var(--comb) 100%); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.25rem; border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 18px rgba(232,67,58,0.25); }
-    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-    .btn-next:not(:disabled):hover { transform: translateY(-2px); opacity: 0.93; }
-    .loading-wrap { text-align: center; padding: 3rem 1rem; animation: popIn 0.35s ease; }
-    .egg-spin { font-size: 3.5rem; display: inline-block; animation: wobble 0.7s ease-in-out infinite alternate; margin-bottom: 1rem; }
-    @keyframes wobble { from { transform: rotate(-15deg) scale(1); } to { transform: rotate(15deg) scale(1.07); } }
-    .loading-wrap p { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--earth); }
-    .loading-wrap small { display: block; margin-top: 0.4rem; font-size: 0.9rem; color: #a07850; }
+    .btn-next { display: block; width: 100%; margin-top: 1.3rem; padding: 0.9rem; background: linear-gradient(135deg, var(--yolk), var(--comb)); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.2rem; border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 18px rgba(232,67,58,0.25); }
+    .btn-next:disabled { opacity: 0.38; cursor: not-allowed; transform: none; }
+    .btn-next:not(:disabled):hover { transform: translateY(-2px); opacity: 0.92; }
+
+    /* loading */
+    .loading-wrap { text-align: center; padding: 2.5rem 1rem; animation: popIn 0.35s ease; }
+    .egg-spin { font-size: 3.5rem; display: inline-block; animation: wobble 0.7s ease-in-out infinite alternate; margin-bottom: 0.8rem; }
+    @keyframes wobble { from { transform: rotate(-15deg) scale(1); } to { transform: rotate(15deg) scale(1.08); } }
+    .loading-wrap h3 { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--earth); margin-bottom: 0.3rem; }
+    .loading-wrap p { font-size: 0.92rem; color: #a07850; }
+    .loading-steps { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .loading-step { font-size: 0.88rem; font-weight: 700; color: #c8a870; transition: color 0.3s; }
+    .loading-step.done { color: var(--feather); }
+    .loading-step.active { color: var(--comb); }
+
+    /* result */
     .result-wrap { animation: popIn 0.45s cubic-bezier(.4,0,.2,1); }
-    .result-breed-badge { text-align: center; font-size: 5rem; margin-bottom: 0.5rem; line-height: 1; }
-    .result-card { background: var(--cream); border-radius: 24px; padding: 2rem; box-shadow: 0 6px 32px var(--shadow); border: 2px solid #f0e0c8; }
-    .result-card h2 { font-family: 'Fredoka One', cursive; font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--comb); text-align: center; margin-bottom: 0.3rem; }
-    .breed-name { text-align: center; font-family: 'Fredoka One', cursive; font-size: clamp(1.1rem, 3.5vw, 1.5rem); color: var(--yolk); margin-bottom: 1.4rem; }
-    .result-text { font-size: 1.02rem; line-height: 1.7; color: #5a3d20; }
-    .result-traits { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
-    .trait-pill { background: #fff0d6; border: 1.5px solid var(--yolk); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.85rem; font-weight: 700; color: #8a5020; }
-    .btn-retry { display: block; width: 100%; margin-top: 1.6rem; padding: 0.85rem; background: var(--feather); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.2rem; border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 18px rgba(109,190,108,0.3); }
-    .btn-retry:hover { transform: translateY(-2px); opacity: 0.9; }
-    .share-row { display: flex; gap: 0.75rem; margin-top: 0.85rem; }
-    .btn-share { flex: 1; padding: 0.7rem; background: #fff; border: 2px solid #e8d8c0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 800; color: var(--earth); cursor: pointer; transition: border-color 0.18s, background 0.18s; }
+    .result-card { background: var(--cream); border-radius: 24px; padding: 0; box-shadow: 0 8px 40px var(--shadow); border: 2px solid #f0e0c8; overflow: hidden; }
+    .result-img-wrap { width: 100%; aspect-ratio: 1/1; max-height: 380px; background: linear-gradient(135deg, #fff8ee, #ffe8d0); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .result-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .result-img-placeholder { font-size: 6rem; }
+    .img-generating { position: absolute; inset: 0; background: rgba(255,248,238,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; }
+    .img-generating span { font-size: 2.5rem; animation: wobble 0.7s ease-in-out infinite alternate; }
+    .img-generating p { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--earth); }
+    .result-body { padding: 1.8rem 2rem 2rem; }
+    .result-match-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yolk); margin-bottom: 0.3rem; }
+    .result-breed { font-family: 'Fredoka One', cursive; font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--comb); line-height: 1.1; margin-bottom: 0.3rem; }
+    .result-tagline { font-family: 'Fredoka One', cursive; font-size: 1.05rem; color: #a07040; margin-bottom: 1.2rem; font-style: italic; }
+    .result-reading { font-size: 1rem; line-height: 1.75; color: #5a3d20; margin-bottom: 1.2rem; }
+    .result-traits { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.4rem; }
+    .trait-pill { background: #fff0d6; border: 1.5px solid var(--yolk); border-radius: 99px; padding: 0.28rem 0.85rem; font-size: 0.83rem; font-weight: 800; color: #8a5020; }
+    .coloring-box { background: linear-gradient(135deg, #f0fff0, #e8f8e8); border: 2px dashed var(--feather); border-radius: 16px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem; }
+    .coloring-box h4 { font-family: 'Fredoka One', cursive; font-size: 1.05rem; color: #3a7a3a; margin-bottom: 0.4rem; }
+    .coloring-box p { font-size: 0.88rem; color: #4a6a4a; line-height: 1.5; }
+    .btn-coloring { display: inline-block; margin-top: 0.7rem; padding: 0.5rem 1.1rem; background: var(--feather); color: #fff; font-family: 'Fredoka One', cursive; font-size: 0.95rem; border: none; border-radius: 10px; cursor: pointer; }
+    .share-row { display: flex; gap: 0.7rem; margin-bottom: 0.8rem; }
+    .btn-share { flex: 1; padding: 0.65rem; background: #fff; border: 2px solid #e8d8c0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800; color: var(--earth); cursor: pointer; transition: border-color 0.18s, background 0.18s; }
     .btn-share:hover { border-color: var(--yolk); background: #fff8ee; }
-    .error-msg { background: #fff0ee; border: 2px solid var(--comb); border-radius: 14px; padding: 1.1rem 1.2rem; color: var(--comb); font-weight: 700; font-size: 0.95rem; margin-top: 1rem; text-align: center; }
+    .btn-retry { display: block; width: 100%; padding: 0.85rem; background: var(--feather); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.15rem; border: none; border-radius: 14px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; box-shadow: 0 4px 18px rgba(109,190,108,0.3); }
+    .btn-retry:hover { transform: translateY(-2px); opacity: 0.9; }
+    .error-msg { background: #fff0ee; border: 2px solid var(--comb); border-radius: 14px; padding: 1rem 1.2rem; color: var(--comb); font-weight: 700; font-size: 0.92rem; margin-top: 1rem; text-align: center; }
     footer { text-align: center; margin-top: 3rem; font-size: 0.82rem; color: #b09070; font-weight: 600; }
     footer a { color: var(--comb); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 <div class="bg-feathers" id="bgFeathers"></div>
 <div class="wrapper">
   <header>
-    <div class="header-badge">&#x1F413; The Chicken Lady Presents</div>
-    <h1>What Chicken<br><span>Are You?</span></h1>
-    <p>Answer 6 clucky questions and our AI will reveal your inner chicken breed.</p>
-    <div class="chicken-emoji-row">&#x1F95A;&#x1F423;&#x1F425;&#x1F413;</div>
+    <div class="header-badge">&#x1F413; The Chicken Lady</div>
+    <h1>What Chicken Breed<br><span>Matches Your Vibe?</span></h1>
+    <p>Answer 8 fun questions and discover which dramatic, fabulous chicken breed is your spirit animal.</p>
+    <div class="emoji-row">&#x1F95A;&#x1F423;&#x1F425;&#x1F413;&#x2728;</div>
   </header>
   <div id="app"></div>
   <footer>
-    <p>Made with &#x2764; by <a href="https://chickens.rlbdesigns.com" target="_blank">The Chicken Lady</a> &nbsp;&bull;&nbsp; Powered by Groq AI</p>
+    <p>Made with &#x2764; by <a href="https://chickens.rlbdesigns.com" target="_blank">The Chicken Lady</a> &nbsp;&bull;&nbsp; Powered by Groq AI + Google Imagen</p>
   </footer>
 </div>
 
 <script>
 var WORKER_URL = "https://chicken-lady-proxy.iamthechickenlady.workers.dev";
 
+var BREEDS = {
+  "Silkie": {
+    emoji: "&#x1F90D;",
+    tagline: "Fluffy, dramatic, lover of cozy blankets",
+    imagePrompt: "An adorable fluffy white Silkie chicken with ultra-soft feathers, sitting on a cozy pastel blanket, wearing a tiny knitted scarf, big cute eyes, kawaii style, vibrant watercolor illustration, whimsical, warm pastel colors, highly detailed, cute and charming"
+  },
+  "Polish Chicken": {
+    emoji: "&#x1F3B8;",
+    tagline: "Eccentric rockstar in an oversized feather hat",
+    imagePrompt: "An adorable Polish chicken with a huge dramatic poofy feather crest on its head like a rockstar hairdo, wearing tiny sunglasses, vibrant colorful feathers, kawaii style, watercolor illustration, whimsical, bright fun colors, highly detailed, cute and charming"
+  },
+  "Rhode Island Red": {
+    emoji: "&#x1F4BC;",
+    tagline: "The independent, no-nonsense boss hen",
+    imagePrompt: "An adorable confident Rhode Island Red chicken standing tall and proud, rich mahogany red feathers gleaming, wearing a tiny business bow tie, kawaii style, vibrant watercolor illustration, whimsical, warm rich colors, highly detailed, cute and charming"
+  },
+  "Brahma": {
+    emoji: "&#x1F9D8;",
+    tagline: "Gentle giant — calm, wise, and unbothered",
+    imagePrompt: "An adorable giant fluffy Brahma chicken with feathered feet, serene calm expression, sitting peacefully like a Buddha, soft muted feather patterns, kawaii style, watercolor illustration, whimsical, gentle earth tones, highly detailed, cute and charming"
+  },
+  "Easter Egger": {
+    emoji: "&#x1F308;",
+    tagline: "Creative free spirit who surprises everyone",
+    imagePrompt: "An adorable Easter Egger chicken surrounded by colorful eggs in pastel rainbow colors, multi-colored feathers, paint splashes everywhere, artist beret on head, kawaii style, vibrant watercolor illustration, whimsical, rainbow colors, highly detailed, cute and charming"
+  },
+  "Sebright": {
+    emoji: "&#x1F98B;",
+    tagline: "Tiny but mighty — fiercely confident fashionista",
+    imagePrompt: "An adorable tiny Sebright chicken with intricate lace-patterned feathers, strutting confidently on a fashion runway, wearing a tiny crown, kawaii style, vibrant watercolor illustration, whimsical, gold and black elegant colors, highly detailed, cute and charming"
+  },
+  "Buff Orpington": {
+    emoji: "&#x1F33B;",
+    tagline: "Warm, nurturing — everyone's favorite friend",
+    imagePrompt: "An adorable fluffy golden Buff Orpington chicken with warm golden feathers, surrounded by little chicks, holding a tiny tray of baked goods, kawaii style, vibrant watercolor illustration, whimsical, warm golden sunny colors, highly detailed, cute and charming"
+  },
+  "Ayam Cemani": {
+    emoji: "&#x1F52E;",
+    tagline: "Mysterious, all-black, intensely cool",
+    imagePrompt: "An adorable all-black Ayam Cemani chicken with iridescent midnight feathers that shimmer with purple and blue, wearing a tiny mystical star cape, surrounded by glowing stars, kawaii style, vibrant watercolor illustration, whimsical, deep jewel tones, highly detailed, cute and charming"
+  }
+};
+
+var COLORING_PROMPTS = {
+  "Silkie": "A cute Silkie chicken with ultra-fluffy feathers sitting on a cozy blanket, wearing a tiny knitted scarf, surrounded by hearts and stars, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical and adorable style",
+  "Polish Chicken": "A cute Polish chicken with a huge dramatic poofy feather crest, wearing tiny sunglasses and a rockstar pose, surrounded by music notes and stars, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style",
+  "Rhode Island Red": "A cute confident Rhode Island Red chicken standing tall wearing a tiny bow tie, surrounded by little stars and crowns, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style",
+  "Brahma": "A cute giant fluffy Brahma chicken with feathered feet sitting peacefully, surrounded by flowers and butterflies, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style",
+  "Easter Egger": "A cute Easter Egger chicken wearing an artist beret surrounded by colorful eggs and paint splashes, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style",
+  "Sebright": "A cute tiny Sebright chicken with lace-patterned feathers wearing a tiny crown strutting on a runway, surrounded by butterflies, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style",
+  "Buff Orpington": "A cute fluffy Buff Orpington chicken surrounded by little chicks and baked goods, flowers all around, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style",
+  "Ayam Cemani": "A cute all-black Ayam Cemani chicken wearing a tiny star cape surrounded by moons and glowing stars, simple bold outlines, black and white coloring page for kids, no shading, clean lines, whimsical style"
+};
+
 var questions = [
-  { text: "It's a beautiful morning on the farm. What's the first thing you do?", answers: [
-    { emoji: "&#x1F305;", text: "Crow loudly and wake up everyone — the day starts NOW!" },
-    { emoji: "&#x1F33F;", text: "Quietly wander the yard, pecking at interesting things" },
-    { emoji: "&#x1F6CC;", text: "Stay in the coop a little longer. The sun can wait." },
-    { emoji: "&#x1F451;", text: "Strut to the best spot and make sure everyone notices" }
+  { text: "Your friends would describe your energy as...", answers: [
+    { emoji: "&#x2728;", text: "Soft, dreamy, and comforting — like a warm hug" },
+    { emoji: "&#x1F525;", text: "Bold, unpredictable, and totally unique" },
+    { emoji: "&#x1F4AA;", text: "Driven, focused, and always getting things done" },
+    { emoji: "&#x1F9D8;", text: "Calm, steady, and impossible to rattle" }
   ]},
-  { text: "Someone new joins the flock. How do you react?", answers: [
-    { emoji: "&#x1F91D;", text: "Walk right up and introduce yourself immediately" },
-    { emoji: "&#x1F440;", text: "Watch from a safe distance for a while first" },
-    { emoji: "&#x1F624;", text: "This is MY yard. They need to earn their place." },
-    { emoji: "&#x1F389;", text: "The more the merrier — new friend to explore with!" }
+  { text: "Pick your ideal Saturday afternoon:", answers: [
+    { emoji: "&#x1F6CB;", text: "Wrapped in the fluffiest blanket with snacks and a show" },
+    { emoji: "&#x1F3A8;", text: "Creating something wild — art, music, crafts, anything goes" },
+    { emoji: "&#x1F4C8;", text: "Knocking out your to-do list and crushing goals" },
+    { emoji: "&#x1F333;", text: "A peaceful walk outdoors, totally in your own world" }
   ]},
-  { text: "You discover the most amazing pile of scratch grain. What do you do?", answers: [
-    { emoji: "&#x1F37D;", text: "Dive in immediately — finders keepers!" },
-    { emoji: "&#x1F4E2;", text: "Call the whole flock over to share the discovery" },
-    { emoji: "&#x1F92B;", text: "Secretly peck quietly so you can enjoy it alone" },
-    { emoji: "&#x1F50D;", text: "Inspect it carefully first — you never know!" }
+  { text: "What's your fashion philosophy?", answers: [
+    { emoji: "&#x1F90D;", text: "Soft, cozy layers — comfort is everything" },
+    { emoji: "&#x1F3B8;", text: "Statement pieces — the bolder and weirder the better" },
+    { emoji: "&#x1F454;", text: "Classic and clean — I let my results do the talking" },
+    { emoji: "&#x1F9F8;", text: "Whatever feels right — I'm not here to impress anyone" }
   ]},
-  { text: "A thunderstorm rolls in. Where are you?", answers: [
-    { emoji: "&#x1F3C3;", text: "Already back in the coop before the first drop falls" },
-    { emoji: "&#x1F327;", text: "Still outside — a little rain never bothered me" },
-    { emoji: "&#x1F631;", text: "Running in circles making a huge fuss about it" },
-    { emoji: "&#x1F634;", text: "Fast asleep in a cozy corner of the coop" }
+  { text: "At a party, where do you end up?", answers: [
+    { emoji: "&#x1F6CB;", text: "Curled up with one close friend in a quiet corner" },
+    { emoji: "&#x1F57A;", text: "On the dance floor being completely yourself" },
+    { emoji: "&#x1F4CB;", text: "Organizing everything — who brought what, what's next" },
+    { emoji: "&#x1F4AC;", text: "Having one really deep conversation all night" }
   ]},
-  { text: "What's your personal style?", answers: [
-    { emoji: "&#x2728;", text: "Fluffy, fabulous, and impossible to ignore" },
-    { emoji: "&#x1F3AF;", text: "Sleek and practical — looks aren't everything" },
-    { emoji: "&#x1F3A8;", text: "Bold colors and unique patterns — I'm a statement" },
-    { emoji: "&#x1F90E;", text: "Classic and understated — elegance over flash" }
+  { text: "When life gets stressful, you...", answers: [
+    { emoji: "&#x1F6D1;", text: "Retreat to your cozy safe space immediately" },
+    { emoji: "&#x1F3A4;", text: "Channel it into something creative and expressive" },
+    { emoji: "&#x1F4DD;", text: "Make a plan and attack it systematically" },
+    { emoji: "&#x1F9D8;", text: "Take a breath — you've seen worse. This will pass." }
   ]},
-  { text: "How do you handle a problem?", answers: [
-    { emoji: "&#x1F4AA;", text: "Head on — cluck loudly until something changes" },
-    { emoji: "&#x1F9E0;", text: "Think it through carefully before making a move" },
-    { emoji: "&#x1F91D;", text: "Gather the flock and figure it out together" },
-    { emoji: "&#x1F6B6;", text: "Walk away and find a better spot entirely" }
+  { text: "Your dream home aesthetic is:", answers: [
+    { emoji: "&#x1F95A;", text: "Cottagecore — soft, warm, full of fluffy textures" },
+    { emoji: "&#x1F3A7;", text: "Eclectic maximalist — color everywhere, no rules" },
+    { emoji: "&#x1F3D8;", text: "Minimalist and functional — a place for everything" },
+    { emoji: "&#x1F332;", text: "Rustic and natural — wood, plants, earthy tones" }
+  ]},
+  { text: "Choose your superpower:", answers: [
+    { emoji: "&#x1F496;", text: "Making everyone feel instantly loved and safe" },
+    { emoji: "&#x1F52E;", text: "Surprising people with unexpected, brilliant ideas" },
+    { emoji: "&#x26A1;", text: "Getting ten things done while others finish one" },
+    { emoji: "&#x1F5FF;", text: "Staying mysteriously calm in any situation" }
+  ]},
+  { text: "Which snack are you?", answers: [
+    { emoji: "&#x1F9C8;", text: "Warm chocolate chip cookies fresh from the oven" },
+    { emoji: "&#x1F32E;", text: "The most chaotic loaded nachos you've ever seen" },
+    { emoji: "&#x2615;", text: "Black coffee — efficient, effective, no fluff" },
+    { emoji: "&#x1F375;", text: "Calming herbal tea with local honey" }
   ]}
 ];
 
@@ -133,15 +216,15 @@ var selected = null;
 var answers = [];
 
 // floating feathers
-var feathers = ["&#x1FAB6;","&#x1F413;","&#x1F95A;","&#x1F423;","&#x1F33E;","&#x1F33B;","&#x2728;"];
+var featherList = ["&#x1FAB6;","&#x1F413;","&#x1F95A;","&#x1F423;","&#x1F33E;","&#x2728;","&#x1F33B;"];
 var bg = document.getElementById("bgFeathers");
-for (var f = 0; f < 18; f++) {
+for (var f = 0; f < 20; f++) {
   var s = document.createElement("span");
-  s.innerHTML = feathers[Math.floor(Math.random() * feathers.length)];
+  s.innerHTML = featherList[Math.floor(Math.random() * featherList.length)];
   s.style.left = (Math.random() * 100) + "vw";
-  s.style.animationDuration = (12 + Math.random() * 20) + "s";
+  s.style.animationDuration = (14 + Math.random() * 18) + "s";
   s.style.animationDelay = "-" + (Math.random() * 20) + "s";
-  s.style.fontSize = (1.2 + Math.random() * 1.8) + "rem";
+  s.style.fontSize = (1.1 + Math.random() * 1.6) + "rem";
   bg.appendChild(s);
 }
 
@@ -149,14 +232,7 @@ function render() {
   var app = document.getElementById("app");
   var q = questions[current];
   var pct = Math.round((current / questions.length) * 100);
-  var btns = "";
-  for (var i = 0; i < q.answers.i; i++) {
-    var a = q.answers[i];
-    var sel = (selected === i) ? " selected" : "";
-    btns += '<button class="answer-btn' + sel + '" onclick="pick(' + i + ')"><span class="answer-emoji">' + a.emoji + '</span>' + a.text + '</button>';
-  }
-  var nextLabel = (current < questions.length - 1) ? "Next Question &#x1F413;" : "Find My Chicken! &#x1F95A;";
-  var nextDisabled = (selected === null) ? "disabled" : "";
+
   app.innerHTML =
     '<div class="progress-wrap"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
     '<div class="progress-label">Question ' + (current + 1) + ' of ' + questions.length + '</div>' +
@@ -164,32 +240,26 @@ function render() {
       '<div class="question-num">Question ' + (current + 1) + '</div>' +
       '<div class="question-text">' + q.text + '</div>' +
       '<div class="answers" id="answers"></div>' +
-      '<button class="btn-next" ' + nextDisabled + ' onclick="nextQ()">' + nextLabel + '</button>' +
+      '<button class="btn-next" id="btnNext" ' + (selected === null ? 'disabled' : '') + ' onclick="nextQ()">' +
+        (current < questions.length - 1 ? 'Next Question &#x1F413;' : 'Discover My Breed! &#x1F95A;') +
+      '</button>' +
     '</div>';
 
-  // build answer buttons safely
   var answersDiv = document.getElementById("answers");
   for (var j = 0; j < q.answers.length; j++) {
     var btn = document.createElement("button");
     btn.className = "answer-btn" + (selected === j ? " selected" : "");
-    btn.innerHTML = '<span class="answer-emoji">' + q.answers[j].emoji + '</span>' + q.answers[j].text;
-    btn.setAttribute("data-index", j);
+    btn.innerHTML = '<span style="margin-right:0.5rem;font-size:1.1em">' + q.answers[j].emoji + '</span>' + q.answers[j].text;
     btn.onclick = (function(idx) { return function() { pick(idx); }; })(j);
     answersDiv.appendChild(btn);
   }
 }
 
-function pick(i) {
-  selected = i;
-  render();
-}
+function pick(i) { selected = i; render(); }
 
 function nextQ() {
   if (selected === null) return;
-  answers.push({
-    question: questions[current].text,
-    answer: questions[current].answers[selected].text
-  });
+  answers.push({ question: questions[current].text, answer: questions[current].answers[selected].text });
   if (current < questions.length - 1) {
     current++;
     selected = null;
@@ -201,79 +271,150 @@ function nextQ() {
 }
 
 function showLoading() {
-  var msgs = ["Consulting the flock...", "Reading the feathers...", "Cracking open your destiny...", "Asking the head hen..."];
-  var msg = msgs[Math.floor(Math.random() * msgs.length)];
   document.getElementById("app").innerHTML =
     '<div class="loading-wrap">' +
       '<div class="egg-spin">&#x1F95A;</div>' +
-      '<p>' + msg + '</p>' +
-      '<small>The Chicken Lady is thinking...</small>' +
+      '<h3>Finding your breed match...</h3>' +
+      '<p>The Chicken Lady is consulting the flock</p>' +
+      '<div class="loading-steps">' +
+        '<div class="loading-step active" id="step1">&#x1F50D; Analyzing your vibe...</div>' +
+        '<div class="loading-step" id="step2">&#x1F413; Matching your breed...</div>' +
+        '<div class="loading-step" id="step3">&#x1F3A8; Painting your chicken portrait...</div>' +
+      '</div>' +
     '</div>';
+}
+
+function updateStep(stepId, isDone) {
+  var el = document.getElementById(stepId);
+  if (!el) return;
+  if (isDone) { el.className = "loading-step done"; }
+  else { el.className = "loading-step active"; }
 }
 
 function getResult() {
   var lines = "";
   for (var i = 0; i < answers.length; i++) {
-    lines += "Q" + (i + 1) + ': "' + answers[i].question + '" -> "' + answers[i].answer + '"\n';
+    lines += "Q" + (i+1) + ': "' + answers[i].question + '" -> "' + answers[i].answer + '"\n';
   }
 
-  var prompt = "You are The Chicken Lady — a wildly enthusiastic, warm, and funny chicken expert.\n" +
-    "Based on these quiz answers, reveal which chicken breed this person is.\n\n" +
+  var breedList = Object.keys(BREEDS).join(", ");
+
+  var prompt = "You are The Chicken Lady — wildly enthusiastic, warm, and hilarious chicken expert.\n" +
+    "Based on these quiz answers, match this person to ONE chicken breed from this exact list: " + breedList + "\n\n" +
     "ANSWERS:\n" + lines + "\n" +
-    "Respond in this EXACT JSON format (no markdown, no code fences, just raw JSON):\n" +
-    '{"breed":"Breed Name","emoji":"one emoji","headline":"A fun 6-8 word headline","reading":"3-4 sentences in warm funny voice with a chicken fact","traits":["trait1","trait2","trait3","trait4"]}';
+    "Respond ONLY in this exact JSON format (no markdown, no code fences):\n" +
+    '{"breed":"exact breed name from the list","headline":"6-8 word fun headline","reading":"3-4 sentences in The Chicken Lady warm funny voice, personal to their answers, include a real fun chicken fact about this breed","traits":["trait1","trait2","trait3","trait4"]}';
 
   fetch(WORKER_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: prompt })
+    body: JSON.stringify({ action: "quiz", prompt: prompt })
   })
   .then(function(res) {
-    if (!res.ok) {
-      return res.text().then(function(t) { throw new Error("Worker error " + res.status + ": " + t); });
-    }
+    if (!res.ok) return res.text().then(function(t) { throw new Error("Worker error " + res.status + ": " + t); });
     return res.json();
   })
   .then(function(data) {
+    updateStep("step1", true);
+    updateStep("step2", false);
     var raw = data.choices[0].message.content.trim();
-    var cleaned = raw.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/, "").trim();
+    var cleaned = raw.replace(/^```json\s*/i,"").replace(/^```\s*/i,"").replace(/```\s*$/,"").trim();
     var result = JSON.parse(cleaned);
-    showResult(result);
+
+    // Normalize breed name
+    var matchedBreed = null;
+    var breedKeys = Object.keys(BREEDS);
+    for (var b = 0; b < breedKeys.length; b++) {
+      if (result.breed && result.breed.toLowerCase().indexOf(breedKeys[b].toLowerCase()) !== -1) {
+        matchedBreed = breedKeys[b];
+        break;
+      }
+    }
+    if (!matchedBreed) matchedBreed = breedKeys[Math.floor(Math.random() * breedKeys.length)];
+    result.breed = matchedBreed;
+
+    updateStep("step2", true);
+    updateStep("step3", false);
+    showResult(result, null); // show result immediately with placeholder
+    generateImage(matchedBreed); // then generate image async
+  })
+  .catch(function(err) { showError(err.message); });
+}
+
+function generateImage(breedName) {
+  var breedData = BREEDS[breedName];
+  if (!breedData) return;
+
+  fetch(WORKER_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "image", imagePrompt: breedData.imagePrompt })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.image) {
+      var imgEl = document.getElementById("resultImg");
+      var genEl = document.getElementById("imgGenerating");
+      if (imgEl) {
+        imgEl.src = "data:image/png;base64," + data.image;
+        imgEl.style.display = "block";
+      }
+      if (genEl) genEl.style.display = "none";
+    }
   })
   .catch(function(err) {
-    showError(err.message);
+    var genEl = document.getElementById("imgGenerating");
+    if (genEl) {
+      genEl.innerHTML = '<span>' + (BREEDS[breedName] ? BREEDS[breedName].emoji : "&#x1F413;") + '</span><p>Image unavailable</p>';
+    }
   });
 }
 
-function showResult(r) {
+function showResult(r, imgB64) {
+  var breedData = BREEDS[r.breed] || { emoji: "&#x1F413;", tagline: "", imagePrompt: "" };
   var traits = "";
   if (r.traits) {
     for (var i = 0; i < r.traits.length; i++) {
       traits += '<span class="trait-pill">' + r.traits[i] + '</span>';
     }
   }
-  var shareText = "I am a " + r.breed + "! " + r.headline + " Take the quiz at chickens.rlbdesigns.com";
+  var shareText = "I matched with the " + r.breed + "! " + r.headline + " Find your chicken vibe at chickens.rlbdesigns.com";
+
   document.getElementById("app").innerHTML =
     '<div class="result-wrap">' +
       '<div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div>' +
-      '<div class="progress-label" style="color:var(--feather)">Complete!</div>' +
-      '<div class="result-breed-badge">' + (r.emoji || "&#x1F413;") + '</div>' +
+      '<div class="progress-label" style="color:var(--feather)">&#x2705; Your vibe has been clucked!</div>' +
       '<div class="result-card">' +
-        '<h2>' + (r.headline || "You found your chicken!") + '</h2>' +
-        '<div class="breed-name">You are: The ' + r.breed + '</div>' +
-        '<p class="result-text">' + r.reading + '</p>' +
-        '<div class="result-traits">' + traits + '</div>' +
-        '<div class="share-row">' +
-          '<button class="btn-share" id="copyBtn">&#x1F4CB; Copy Result</button>' +
-          '<button class="btn-share" id="shareBtn">&#x1F517; Share</button>' +
+        '<div class="result-img-wrap">' +
+          '<img id="resultImg" src="" alt="' + r.breed + '" style="display:none"/>' +
+          '<div id="imgGenerating" class="img-generating">' +
+            '<span>&#x1F3A8;</span>' +
+            '<p>Painting your chicken portrait...</p>' +
+          '</div>' +
         '</div>' +
-        '<button class="btn-retry" onclick="restart()">&#x1F504; Take the Quiz Again</button>' +
+        '<div class="result-body">' +
+          '<div class="result-match-label">Your chicken vibe match is...</div>' +
+          '<div class="result-breed">' + r.breed + ' ' + breedData.emoji + '</div>' +
+          '<div class="result-tagline">' + breedData.tagline + '</div>' +
+          '<p class="result-reading">' + r.reading + '</p>' +
+          '<div class="result-traits">' + traits + '</div>' +
+          '<div class="coloring-box">' +
+            '<h4>&#x1F58D; Free Coloring Page!</h4>' +
+            '<p>Download your free <strong>' + r.breed + '</strong> coloring page — print it, color it, and show off your chicken vibe! Click below to get yours.</p>' +
+            '<button class="btn-coloring" onclick="downloadColoring(\'' + r.breed.replace(/'/g, "\\'") + '\')">&#x2B07; Get My Free Coloring Page</button>' +
+          '</div>' +
+          '<div class="share-row">' +
+            '<button class="btn-share" id="copyBtn">&#x1F4CB; Copy Result</button>' +
+            '<button class="btn-share" id="shareBtn">&#x1F517; Share</button>' +
+          '</div>' +
+          '<button class="btn-retry" onclick="restart()">&#x1F504; Take the Quiz Again</button>' +
+        '</div>' +
       '</div>' +
     '</div>';
 
   document.getElementById("copyBtn").onclick = function() {
     navigator.clipboard.writeText(shareText)
-      .then(function() { alert("Copied! Share your inner chicken!"); })
+      .then(function() { alert("Copied! Share your chicken vibe!"); })
       .catch(function() { alert("Couldn't copy — try manually."); });
   };
   document.getElementById("shareBtn").onclick = function() {
@@ -285,16 +426,25 @@ function showResult(r) {
   };
 }
 
+function downloadColoring(breedName) {
+  var prompt = COLORING_PROMPTS[breedName];
+  if (!prompt) { alert("Coloring page coming soon for " + breedName + "!"); return; }
+  var msg = "To get your FREE " + breedName + " coloring page:\n\n" +
+    "1. Go to aistudio.google.com\n" +
+    "2. Click 'Create' then choose ImageFX or Imagen\n" +
+    "3. Paste this prompt:\n\n" + prompt + "\n\n" +
+    "4. Download and print your coloring page!";
+  alert(msg);
+}
+
 function showError(msg) {
   document.getElementById("app").innerHTML =
     '<div class="error-msg">The hens got confused! ' + msg + '</div>' +
-    '<button class="btn-retry" style="margin-top:1rem" onclick="restart()">&#x1F504; Start Over</button>';
+    '<button class="btn-retry" style="margin-top:1rem;display:block;width:100%;padding:0.85rem;background:var(--feather);color:#fff;font-family:Fredoka One,cursive;font-size:1.1rem;border:none;border-radius:14px;cursor:pointer" onclick="restart()">&#x1F504; Start Over</button>';
 }
 
 function restart() {
-  current = 0;
-  selected = null;
-  answers = [];
+  current = 0; selected = null; answers = [];
   render();
 }
 
